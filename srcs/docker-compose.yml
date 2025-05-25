@@ -2,7 +2,7 @@ services:
   # NGINXサービス（既存）
   nginx:
     build:
-      context: ./srcs/requirements/nginx
+      context: ./requirements/nginx
     ports:
       - "443:443"
     volumes:
@@ -13,7 +13,7 @@ services:
   # MariaDBサービス
   mariadb:
     build:
-      context: ./srcs/requirements/mariadb
+      context: ./requirements/mariadb
     environment:
       MYSQL_ROOT_PASSWORD: root_password
     volumes:
@@ -24,7 +24,7 @@ services:
   # WordPressサービス
   wordpress:
     build:
-      context: ./srcs/requirements/wordpress
+      context: ./requirements/wordpress
     environment:
       WORDPRESS_DB_HOST: mariadb
       WORDPRESS_DB_USER: wp_user

@@ -16,3 +16,4 @@ RUN mkdir -p /etc/nginx/ssl && \
 
 # NGINXをフォアグラウンドで実行（バックグラウンドで動かさない）
 CMD ["nginx", "-g", "daemon off;"]
+# CMD ["sleep", "infinity"]
