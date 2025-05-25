@@ -5,7 +5,8 @@ FROM debian:bullseye
 RUN apt-get update && apt-get install -y nginx openssl
 
 # デフォルトのNGINX設定をカスタム設定に置き換える
-COPY ./conf/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+COPY ./conf/default.conf /etc/nginx/conf.d/default.conf
 
 # SSL証明書を作成する（自己署名証明書を生成）
 RUN mkdir -p /etc/nginx/ssl && \
