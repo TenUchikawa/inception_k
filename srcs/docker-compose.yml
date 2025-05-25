@@ -1,15 +1,42 @@
-version: '3.8'
-
 services:
+  # NGINXサービス（既存）
   nginx:
     build:
       context: ./srcs/requirements/nginx
     ports:
-      - "443:443" # HTTPS通信を外部に公開
+      - "443:443"
     volumes:
-      - ./data/nginx:/etc/nginx/conf.d # 設定ファイルをマウント
+      - ./data/nginx:/etc/nginx/conf.d
     networks:
       - inception_network
+
+  # MariaDBサービス
+  mariadb:
+    build:
+      context: ./srcs/requirements/mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - inception_network
+
+  # WordPressサービス
+  wordpress:
+    build:
+      context: ./srcs/requirements/wordpress
+    environment:
+      WORDPRESS_DB_HOST: mariadb
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_password
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - inception_network
+
+volumes:
+  mariadb_data:
+  wordpress_data:
 
 networks:
   inception_network:
