@@ -5,8 +5,10 @@ services:
       context: ./requirements/nginx
     ports:
       - "443:443"
+    # volumes:
+    #   - ./data/nginx:/etc/nginx/conf.d
     volumes:
-      - ./data/nginx:/etc/nginx/conf.d
+      - wordpress_data:/var/www/html
     networks:
       - inception_network
 

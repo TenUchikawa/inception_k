@@ -17,5 +17,8 @@ COPY ./tools/init.sql /docker-entrypoint-initdb.d/
 EXPOSE 3306
 
 USER mysql
-CMD ["mysqld"]
 
+COPY ./tools/init.sh /docker-entrypoint-initdb.d/init.sh
+RUN chmod +x /docker-entrypoint-initdb.d/init.sh
+
+CMD ["/docker-entrypoint-initdb.d/init.sh"]
