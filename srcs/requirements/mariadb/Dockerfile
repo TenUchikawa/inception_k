@@ -10,12 +10,7 @@ RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld
 # 設定ファイルをコピー
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/
 
-# データベースの初期化スクリプトをコピー
-COPY ./tools/init.sql /docker-entrypoint-initdb.d/
 
-# ポート3306でMariaDBを起動
-EXPOSE 3306
-
-USER mysql
-CMD ["mysqld"]
+COPY entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
